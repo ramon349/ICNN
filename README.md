@@ -1,6 +1,5 @@
 
-# Disclaimer 
-This code contains modifications to data prep scripts not intended by the original author. This is only meant to show an example of what dataloading should look like and how to prepare you labels so I and others in my lab can use their own training scripts.   
+
 
 # ICNN
 
