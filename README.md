@@ -1,3 +1,7 @@
+
+# Disclaimer 
+This code contains modifications to data prep scripts not intended by the original author. This is only meant to show an example of what dataloading should look like and how to prepare you labels so I and others in my lab can use their own training scripts.   
+
 # ICNN
 
 This repository is a pytorch implementation of interpretable convolutional neural network
@@ -5,7 +9,6 @@ This repository is a pytorch implementation of interpretable convolutional neura
 
 It is created by [Wen Shen](https://ada-shen.github.io), Ping Zhao, Qiming Li, [Chao Li](
 http://www.ict.cas.cn/sourcedb_2018_ict_cas/cn/jssrck/201810/t20181030_5151364.html).
-
 
 ## Notice
 - **model**
@@ -17,10 +20,10 @@ You can add your own model in the `/model` folder and register the model in `/to
 
 - **dataset**
 
-The project now supports **vocpart, ilsvrc animalpart, cub200, 
-                         celeba, voc2010_crop, helen**.
-                         
-You can add your own dataset in the way similar to the datasets above. 
+Manged to sucessfuly run on  dataset bellow with minor modifications 
+
+The project now supports  ** ilsvrc animalpart ** 
+
 
 **Note that** in our code, we will first make the data into imdb file, 
 so if your dataset is large, the preprocessing time may be long, 
@@ -36,13 +39,24 @@ $ pip install -r requirements.txt
 You can see that we recommend **pytorch=1.2.0**, this is because we find some bugs when pytorch=1.4.0,
 but there is no such problem in pytorch 1.2.0. We will continue to study this problem.
 
+Note this also implies we need to run on either python3.6 or 3.7.  There are no python wheels for pytorch 1.2.0 
+for python3.8 and above. 
+
 ## Usage
 Here, we take **resnet-18 + voc2010_crop bird classification** as an example.
 
-To get the training result, you can run:
+To run a sample  i got the following to work 
 ```bash
-$ python demo.py --model resnet_18 --dataset voc2010_crop --label_name bird
+$ python demo.py --model resnet_18 --dataset ilsvrcanimalpart --label_name n01443537
 ```
+
+# Note 
+there is some dataset preparation needed. Downlaod the ilsvrcanimalpart dataset. Within this repos directory make the folder datasets such that we have  ICNN/datasets/detanimalpart/.  
+
+I also took the liberty to establish what the "negative' class for this dataset is. in load_data.py line 65 I define the negative class as being n01503061_obj. 
+This will break compatability with other datases but i just needed a runnable example to define my own train method.
+
+
 After running the instruction above, you will get a new folder whose path is
 `/resnet_18/voc2010_crop/bird` in the `/task/classification` folder.
 
