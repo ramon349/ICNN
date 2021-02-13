@@ -11,7 +11,7 @@ from tools.lib import cv2imread
 
 def readAnnotation(dataset_path,categoryName):
     minArea = 2500
-    dataset_data_path = dataset_path
+    dataset_data_path = dataset_path +'/detanimalpart'
     dataset_data_namebatch_bndbox_path = os.path.join(dataset_data_path, categoryName + "_obj", "img", "data.mat")
     dataset_data_namebatch_img_path = os.path.join(dataset_data_path, categoryName + "_obj", "img", "img", "")
     mat = h5py.File(dataset_data_namebatch_bndbox_path, 'r')
@@ -34,7 +34,7 @@ def getNegObjSet(neg_path):
     MaxObjNum = 1000
     objset_neg = []
     for i in range(MaxObjNum):
-        filename = ("%05d.JPEG") % (i+1)
+        filename = ("%05d.jpg") % (i+1)  # this should be 4 decimal places. why are we using modulo on a strings 
         img = mpimg.imread(os.path.join(neg_path,filename))
         h = img.shape[0]
         w = img.shape[1]

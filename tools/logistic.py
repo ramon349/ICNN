@@ -7,7 +7,7 @@ class logistic_F(Function):
     def forward(self, x, c):
         #print('loss_forward')
         a = -c.mul(x)
-        b = torch.max(a,torch.zeros(a.size()).cuda())
+        b = torch.max(a,torch.zeros(a.size()) )
         #b = torch.max(a, torch.zeros(a.size()))
         t = b + torch.log(torch.exp(-b) + torch.exp(a-b))
         t = torch.sum(t)

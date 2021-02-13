@@ -10,6 +10,7 @@ from tools.get_voc2010imdb import get_voc2010imdb
 from tools.get_helenimdb import get_helenimdb
 from tools.get_celebaimdb import get_celebaimdb
 from tools.lib import *
+import pdb 
 
 
 class MyDataset(torch.utils.data.Dataset):
@@ -43,8 +44,6 @@ def download_dataset(datasets_path,dataset_path,dataset):
     downloadpath1_vocpart = "http://www.stat.ucla.edu/~xianjie.chen/pascal_part_dataset/trainval.tar.gz"
     downloadpath2_vocpart = "http://host.robots.ox.ac.uk/pascal/VOC/voc2010/VOCtrainval_03-May-2010.tar"
     downloadpath_cub200 = "http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/CUB_200_2011.tgz"
-
-
     if os.path.exists(dataset_path) == False:
         if dataset == "ilsvrcanimalpart":
             os.system(" git clone " + downloadpath_ilsvrcanimalpart + " " + dataset_path)
@@ -63,7 +62,7 @@ def download_dataset(datasets_path,dataset_path,dataset):
 
 
 def get_imdb(root_path,imdb_path,dataset_path,dataset,imagesize,label_name):
-    neg_path = os.path.join(root_path, 'datasets', 'neg')
+    neg_path = os.path.join(root_path, 'datasets', 'detanimalpart' ,'n01503061_obj','img','img')
     imdb_train_path = os.path.join(imdb_path, 'train.mat')
     imdb_val_path = os.path.join(imdb_path, 'val.mat')
     imdb_mean_path = os.path.join(imdb_path, 'mean.mat')
@@ -106,7 +105,7 @@ def get_imdb(root_path,imdb_path,dataset_path,dataset,imagesize,label_name):
 
 
 def load_data(root_path, imdb_path, args):
-    datasets_path = os.path.join(root_path,'datasets')
+    datasets_path = os.path.join(root_path,'datasets') #i changed this 
     # Check if you need to download the dataset
     download_dataset(datasets_path,datasets_path,args.dataset)
     # Check if you need to generate the imdb
